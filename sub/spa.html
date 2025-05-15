@@ -36,28 +36,52 @@
                 color: #888;
                 transform: scale(1.1);
             }
-            .sidebar {
-                position: fixed;
-                top: 60px;
-                left: 0;
-                width: 200px;
-                padding: 20px;
-                background-color: #f5f5f5;
-                height: calc(100% - 60px);
-                box-sizing: border-box;
-                transition: transform 0.3s ease;
-                transform: translateX(-220px);
-                z-index: 1050;
-            }
-            .sidebar.visible {
-                transform: translateX(0);
-            }
-            .sidebar a {
-                display: block;
-                margin-bottom: 10px;
-                color: #333;
-                text-decoration: none;
-            }
+       .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 200px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    height: calc(100% - 60px);
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    transform: translateX(-220px);
+    z-index: 1050;
+}
+
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    text-decoration: none;
+
+    /* 초기 상태 */
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.sidebar.visible a {
+    animation: fadeInSidebar 0.4s ease forwards;
+}
+
+.sidebar.visible a:nth-child(1) { animation-delay: 0.1s; }
+.sidebar.visible a:nth-child(2) { animation-delay: 0.2s; }
+.sidebar.visible a:nth-child(3) { animation-delay: 0.3s; }
+.sidebar.visible a:nth-child(4) { animation-delay: 0.4s; }
+.sidebar.visible a:nth-child(5) { animation-delay: 0.5s; }
+.sidebar.visible a:nth-child(7) { animation-delay: 0.6s; } /* For Investors (skip hr) */
+
+@keyframes fadeInSidebar {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
             header {
                 position: fixed;
                 top: 0;

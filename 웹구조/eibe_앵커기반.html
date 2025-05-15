@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EIBE Company Introduction</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #fff;
+                border-bottom: 1px solid #ccc;
+                z-index: 1000;
+            }
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .menu-toggle {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                width: 30px;
+                height: 30px;
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1100;
+                animation: pulse 2s infinite;
+                transition: color 0.3s, transform 0.3s;
+            }
+            .menu-toggle:hover {
+                color: #888;
+                transform: scale(1.1);
+            }
+            nav {
+                margin-left: 60px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 15px 20px;
+            }
+            .menu {
+                position: relative;
+                margin: 0 20px;
+            }
+            .main-menu {
+                text-decoration: none;
+                color: #333;
+                font-weight: bold;
+                display: block;
+                padding: 5px 0;
+                transition: transform 0.3s ease, text-shadow 0.3s ease,
+                    color 0.3s ease;
+            }
+            .main-menu:hover {
+                transform: translateY(-2px);
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .main-menu:focus {
+                transform: translateY(-2px);
+                text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                outline: none;
+            }
+            .main-menu:active {
+                color: green;
+            }
+            .submenu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                display: none;
+                z-index: 1001;
+                min-width: 200px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+            .menu:hover .submenu {
+                display: block;
+            }
+            .submenu a {
+                padding: 10px;
+                text-decoration: none;
+                color: #333;
+                white-space: nowrap;
+                display: block;
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            .menu:hover .submenu a {
+                animation: slideIn 0.3s forwards;
+            }
+            .menu:hover .submenu a:nth-child(1) {
+                animation-delay: 0.05s;
+            }
+            .menu:hover .submenu a:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+            .menu:hover .submenu a:nth-child(3) {
+                animation-delay: 0.15s;
+            }
+            .menu:hover .submenu a:nth-child(4) {
+                animation-delay: 0.2s;
+            }
+            .menu:hover .submenu a:nth-child(5) {
+                animation-delay: 0.25s;
+            }
+            .sidebar {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 200px;
+                padding: 20px;
+                background-color: #f5f5f5;
+                height: calc(100% - 60px);
+                box-sizing: border-box;
+                transition: transform 0.3s ease;
+                transform: translateX(-220px);
+            }
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+            .sidebar a {
+                display: block;
+                margin-bottom: 10px;
+                color: #333;
+                text-decoration: none;
+            }
+            main {
+                margin-left: 60px;
+                padding: 100px 20px 20px 20px;
+            }
+            section {
+                margin-bottom: 100px;
+            }
+            h2 {
+                border-bottom: 2px solid #ccc;
+                padding-bottom: 10px;
+            }
+            .subsection {
+                padding: 40px 0;
+                margin-bottom: 60px;
+                background: #fafafa;
+                border: 1px solid #ddd;
+                text-align: center;
+                font-size: 18px;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeUp 0.6s ease forwards;
+            }
+            .subsection:nth-of-type(1) {
+                animation-delay: 0.1s;
+            }
+            .subsection:nth-of-type(2) {
+                animation-delay: 0.2s;
+            }
+            .subsection:nth-of-type(3) {
+                animation-delay: 0.3s;
+            }
+            .subsection:nth-of-type(4) {
+                animation-delay: 0.4s;
+            }
+            .subsection:nth-of-type(5) {
+                animation-delay: 0.5s;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+        <header>
+            <strong>앵커기반</strong>
+            <nav>
+                <div class="menu">
+                    <a href="#ceo-letter" class="main-menu">CEO Letter</a>
+                    <div class="submenu">
+                        <a href="#ceo-letter-1">Letter 1</a>
+                        <a href="#ceo-letter-2">Letter 2</a>
+                        <a href="#ceo-letter-3">Letter 3</a>
+                        <a href="#ceo-letter-4">Letter 4</a>
+                        <a href="#ceo-letter-5">Letter 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href="#business-highlights" class="main-menu"
+                        >Business Highlights</a
+                    >
+                    <div class="submenu">
+                        <a href="#business-highlights-1">Highlight 1</a>
+                        <a href="#business-highlights-2">Highlight 2</a>
+                        <a href="#business-highlights-3">Highlight 3</a>
+                        <a href="#business-highlights-4">Highlight 4</a>
+                        <a href="#business-highlights-5">Highlight 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href="#eibe-overview" class="main-menu">EIBE Overview</a>
+                    <div class="submenu">
+                        <a href="#eibe-overview-1">Overview 1</a>
+                        <a href="#eibe-overview-2">Overview 2</a>
+                        <a href="#eibe-overview-3">Overview 3</a>
+                        <a href="#eibe-overview-4">Overview 4</a>
+                        <a href="#eibe-overview-5">Overview 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href="#eibe-businesses" class="main-menu"
+                        >EIBE Businesses</a
+                    >
+                    <div class="submenu">
+                        <a href="#eibe-businesses-1">Business 1</a>
+                        <a href="#eibe-businesses-2">Business 2</a>
+                        <a href="#eibe-businesses-3">Business 3</a>
+                        <a href="#eibe-businesses-4">Business 4</a>
+                        <a href="#eibe-businesses-5">Business 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href="#sustainability" class="main-menu"
+                        >Sustainability</a
+                    >
+                    <div class="submenu">
+                        <a href="#sustainability-1">Sustain 1</a>
+                        <a href="#sustainability-2">Sustain 2</a>
+                        <a href="#sustainability-3">Sustain 3</a>
+                        <a href="#sustainability-4">Sustain 4</a>
+                        <a href="#sustainability-5">Sustain 5</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="sidebar" id="sidebar">
+            <a href="#ceo-letter">CEO Letter</a>
+            <a href="#business-highlights">Business Highlights</a>
+            <a href="#eibe-overview">EIBE Overview</a>
+            <a href="#eibe-businesses">EIBE Businesses</a>
+            <a href="#sustainability">Sustainability</a>
+            <hr />
+            <a href="#investors">For Investors</a>
+        </aside>
+
+        <main id="main">
+            <section id="ceo-letter">
+                <h2>CEO Letter</h2>
+                <div class="subsection" id="ceo-letter-1">
+                    CEO Letter Sample 1
+                </div>
+                <div class="subsection" id="ceo-letter-2">
+                    CEO Letter Sample 2
+                </div>
+                <div class="subsection" id="ceo-letter-3">
+                    CEO Letter Sample 3
+                </div>
+                <div class="subsection" id="ceo-letter-4">
+                    CEO Letter Sample 4
+                </div>
+                <div class="subsection" id="ceo-letter-5">
+                    CEO Letter Sample 5
+                </div>
+            </section>
+            <section id="business-highlights">
+                <h2>Business Highlights</h2>
+                <div class="subsection" id="business-highlights-1">
+                    Highlight 1
+                </div>
+                <div class="subsection" id="business-highlights-2">
+                    Highlight 2
+                </div>
+                <div class="subsection" id="business-highlights-3">
+                    Highlight 3
+                </div>
+                <div class="subsection" id="business-highlights-4">
+                    Highlight 4
+                </div>
+                <div class="subsection" id="business-highlights-5">
+                    Highlight 5
+                </div>
+            </section>
+            <section id="eibe-overview">
+                <h2>EIBE Overview</h2>
+                <div class="subsection" id="eibe-overview-1">Overview 1</div>
+                <div class="subsection" id="eibe-overview-2">Overview 2</div>
+                <div class="subsection" id="eibe-overview-3">Overview 3</div>
+                <div class="subsection" id="eibe-overview-4">Overview 4</div>
+                <div class="subsection" id="eibe-overview-5">Overview 5</div>
+            </section>
+            <section id="eibe-businesses">
+                <h2>EIBE Businesses</h2>
+                <div class="subsection" id="eibe-businesses-1">Business 1</div>
+                <div class="subsection" id="eibe-businesses-2">Business 2</div>
+                <div class="subsection" id="eibe-businesses-3">Business 3</div>
+                <div class="subsection" id="eibe-businesses-4">Business 4</div>
+                <div class="subsection" id="eibe-businesses-5">Business 5</div>
+            </section>
+            <section id="sustainability">
+                <h2>Sustainability</h2>
+                <div class="subsection" id="sustainability-1">
+                    Sustainability 1
+                </div>
+                <div class="subsection" id="sustainability-2">
+                    Sustainability 2
+                </div>
+                <div class="subsection" id="sustainability-3">
+                    Sustainability 3
+                </div>
+                <div class="subsection" id="sustainability-4">
+                    Sustainability 4
+                </div>
+                <div class="subsection" id="sustainability-5">
+                    Sustainability 5
+                </div>
+            </section>
+            <section id="investors">
+                <h2>For Investors</h2>
+                <div class="subsection">Investor Content Placeholder</div>
+            </section>
+        </main>
+
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                sidebar.classList.toggle("visible");
+            }
+        </script>
+    </body>
+</html>

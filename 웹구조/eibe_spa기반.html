@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>EIBE Company Introduction - Tab Mode</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .menu-toggle {
+                position: fixed;
+                top: 15px;
+                left: 15px;
+                width: 30px;
+                height: 30px;
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1100;
+                transition: color 0.3s, transform 0.3s;
+            }
+            .menu-toggle:hover {
+                color: #888;
+                transform: scale(1.1);
+            }
+            .sidebar {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 200px;
+                padding: 20px;
+                background-color: #f5f5f5;
+                height: calc(100% - 60px);
+                box-sizing: border-box;
+                transition: transform 0.3s ease;
+                transform: translateX(-220px);
+                z-index: 1050;
+            }
+            .sidebar.visible {
+                transform: translateX(0);
+            }
+            .sidebar a {
+                display: block;
+                margin-bottom: 10px;
+                color: #333;
+                text-decoration: none;
+            }
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background-color: #fff;
+                border-bottom: 1px solid #ccc;
+                z-index: 1000;
+            }
+            nav {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 15px 20px;
+            }
+            .menu {
+                position: relative;
+                margin: 0 20px;
+            }
+            .main-menu {
+                font-weight: bold;
+                text-decoration: none;
+                color: #333;
+                display: block;
+                padding: 5px 0;
+                cursor: pointer;
+                transition: transform 0.3s, text-shadow 0.3s, color 0.3s;
+            }
+            .main-menu:hover {
+                transform: translateY(-2px);
+                text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+            .main-menu:active {
+                color: green;
+            }
+            .submenu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                display: none;
+                z-index: 1001;
+                min-width: 200px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+            }
+            .menu:hover .submenu {
+                display: flex;
+            }
+            .submenu a {
+                padding: 10px;
+                text-decoration: none;
+                color: #333;
+                white-space: nowrap;
+                display: block;
+                opacity: 0;
+                transform: translateX(-10px);
+                animation: slideIn 0.3s forwards;
+            }
+            .menu:hover .submenu a:nth-child(1) {
+                animation-delay: 0.05s;
+            }
+            .menu:hover .submenu a:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+            .menu:hover .submenu a:nth-child(3) {
+                animation-delay: 0.15s;
+            }
+            .menu:hover .submenu a:nth-child(4) {
+                animation-delay: 0.2s;
+            }
+            .menu:hover .submenu a:nth-child(5) {
+                animation-delay: 0.25s;
+            }
+            @keyframes slideIn {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            main {
+                margin-left: 60px;
+                padding: 100px 20px 20px 20px;
+            }
+            section {
+                display: none;
+            }
+            section.active {
+                display: block;
+            }
+            .subsection {
+                margin: 30px 0;
+                padding: 30px;
+                background: #f9f9f9;
+                border: 1px solid #ddd;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeUp 0.5s ease forwards;
+            }
+            .subsection:nth-of-type(1) {
+                animation-delay: 0.1s;
+            }
+            .subsection:nth-of-type(2) {
+                animation-delay: 0.2s;
+            }
+            .subsection:nth-of-type(3) {
+                animation-delay: 0.3s;
+            }
+            .subsection:nth-of-type(4) {
+                animation-delay: 0.4s;
+            }
+            .subsection:nth-of-type(5) {
+                animation-delay: 0.5s;
+            }
+            @keyframes fadeUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <aside class="sidebar" id="sidebar">
+            <a onclick="showTab('ceo-letter')">CEO Letter</a>
+            <a onclick="showTab('business-highlights')">Business Highlights</a>
+            <a onclick="showTab('eibe-overview')">EIBE Overview</a>
+            <a onclick="showTab('eibe-businesses')">EIBE Businesses</a>
+            <a onclick="showTab('sustainability')">Sustainability</a>
+            <hr />
+            <a onclick="showTab('investors')">For Investors</a>
+        </aside>
+
+        <header>
+            <strong>SPA기반</strong>
+            <nav>
+                <div class="menu">
+                    <a class="main-menu" onclick="showTab('ceo-letter')"
+                        >CEO Letter</a
+                    >
+                    <div class="submenu">
+                        <a onclick="showTab('ceo-letter')">Letter 1</a>
+                        <a onclick="showTab('ceo-letter')">Letter 2</a>
+                        <a onclick="showTab('ceo-letter')">Letter 3</a>
+                        <a onclick="showTab('ceo-letter')">Letter 4</a>
+                        <a onclick="showTab('ceo-letter')">Letter 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a
+                        class="main-menu"
+                        onclick="showTab('business-highlights')"
+                        >Business Highlights</a
+                    >
+                    <div class="submenu">
+                        <a onclick="showTab('business-highlights')"
+                            >Highlight 1</a
+                        >
+                        <a onclick="showTab('business-highlights')"
+                            >Highlight 2</a
+                        >
+                        <a onclick="showTab('business-highlights')"
+                            >Highlight 3</a
+                        >
+                        <a onclick="showTab('business-highlights')"
+                            >Highlight 4</a
+                        >
+                        <a onclick="showTab('business-highlights')"
+                            >Highlight 5</a
+                        >
+                    </div>
+                </div>
+                <div class="menu">
+                    <a class="main-menu" onclick="showTab('eibe-overview')"
+                        >EIBE Overview</a
+                    >
+                    <div class="submenu">
+                        <a onclick="showTab('eibe-overview')">Overview 1</a>
+                        <a onclick="showTab('eibe-overview')">Overview 2</a>
+                        <a onclick="showTab('eibe-overview')">Overview 3</a>
+                        <a onclick="showTab('eibe-overview')">Overview 4</a>
+                        <a onclick="showTab('eibe-overview')">Overview 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a class="main-menu" onclick="showTab('eibe-businesses')"
+                        >EIBE Businesses</a
+                    >
+                    <div class="submenu">
+                        <a onclick="showTab('eibe-businesses')">Business 1</a>
+                        <a onclick="showTab('eibe-businesses')">Business 2</a>
+                        <a onclick="showTab('eibe-businesses')">Business 3</a>
+                        <a onclick="showTab('eibe-businesses')">Business 4</a>
+                        <a onclick="showTab('eibe-businesses')">Business 5</a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a class="main-menu" onclick="showTab('sustainability')"
+                        >Sustainability</a
+                    >
+                    <div class="submenu">
+                        <a onclick="showTab('sustainability')">Sustain 1</a>
+                        <a onclick="showTab('sustainability')">Sustain 2</a>
+                        <a onclick="showTab('sustainability')">Sustain 3</a>
+                        <a onclick="showTab('sustainability')">Sustain 4</a>
+                        <a onclick="showTab('sustainability')">Sustain 5</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main id="main">
+            <section id="ceo-letter" class="active">
+                <h2>CEO Letter</h2>
+                <div class="subsection">CEO Letter Sample 1</div>
+                <div class="subsection">CEO Letter Sample 2</div>
+                <div class="subsection">CEO Letter Sample 3</div>
+                <div class="subsection">CEO Letter Sample 4</div>
+                <div class="subsection">CEO Letter Sample 5</div>
+            </section>
+            <section id="business-highlights">
+                <h2>Business Highlights</h2>
+                <div class="subsection">Highlight 1</div>
+                <div class="subsection">Highlight 2</div>
+                <div class="subsection">Highlight 3</div>
+                <div class="subsection">Highlight 4</div>
+                <div class="subsection">Highlight 5</div>
+            </section>
+            <section id="eibe-overview">
+                <h2>EIBE Overview</h2>
+                <div class="subsection">Overview 1</div>
+                <div class="subsection">Overview 2</div>
+                <div class="subsection">Overview 3</div>
+                <div class="subsection">Overview 4</div>
+                <div class="subsection">Overview 5</div>
+            </section>
+            <section id="eibe-businesses">
+                <h2>EIBE Businesses</h2>
+                <div class="subsection">Business 1</div>
+                <div class="subsection">Business 2</div>
+                <div class="subsection">Business 3</div>
+                <div class="subsection">Business 4</div>
+                <div class="subsection">Business 5</div>
+            </section>
+            <section id="sustainability">
+                <h2>Sustainability</h2>
+                <div class="subsection">Sustainability 1</div>
+                <div class="subsection">Sustainability 2</div>
+                <div class="subsection">Sustainability 3</div>
+                <div class="subsection">Sustainability 4</div>
+                <div class="subsection">Sustainability 5</div>
+            </section>
+        </main>
+        <script>
+            function showTab(id) {
+                document.querySelectorAll("main section").forEach((sec) => {
+                    sec.classList.remove("active");
+                });
+                document.getElementById(id).classList.add("active");
+            }
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                sidebar.classList.toggle("visible");
+            }
+        </script>
+    </body>
+</html>

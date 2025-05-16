@@ -6,156 +6,207 @@
         <title>Tailwind Animation Demo</title>
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="p-10">
+    <body class="p-10 bg-gray-50">
         <h1 class="text-3xl font-bold mb-8 text-black">
-            🚀Animation Demo – 확장형 예시
+            🚀 Animation – 확장형 예시 (Refactored)
         </h1>
 
-        <!-- 기본 애니메이션 -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-            <div class="p-6 bg-white rounded shadow text-center animate-bounce">
-                Bounce
-            </div>
-            <div class="p-6 bg-white rounded shadow text-center animate-ping">
-                Ping
-            </div>
-            <div class="p-6 bg-white rounded shadow text-center animate-pulse">
-                Pulse
-            </div>
-            <div class="p-6 bg-white rounded shadow text-center animate-spin">
-                Spin
-            </div>
-        </div>
-
-        <!-- Hover & 상태 기반 애니메이션 -->
-        <h2 class="text-2xl font-bold mb-6 text-black">
-            🖱 Hover / Focus / Active / Group 애니메이션
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-            <div class="text-center transition hover:scale-110">
-                Hover: Scale
-            </div>
-            <div class="text-center transition hover:rotate-6">
-                Hover: Rotate
-            </div>
-            <div class="text-center transition hover:opacity-50">
-                Hover: Fade
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:bg-blue-600 hover:text-white"
-            >
-                Hover: BG + Text
-            </div>
-            <!-- 개선된 Hover: Shadow 박스 -->
-            <!-- 개선된 Hover: Shadow 박스 (더 명확하게 구분되도록 배경 어둡게, 텍스트와 박스 분리 강조) -->
-            <div
-                class="p-6 bg-neutral-800 border border-gray-400 text-white rounded shadow-none transition-all duration-300 hover:translate-y-1 hover:shadow-2xl"
-            >
-                <span class="block font-semibold text-lg">Hover: Shadow</span>
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:skew-x-6"
-            >
-                Hover: Skew X
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-125 focus:scale-90"
-            >
-                Hover + Focus
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:-translate-y-2 active:opacity-70"
-            >
-                Hover + Active
-            </div>
-            <div
-                class="group p-6 bg-white rounded border border-gray-400 shadow text-center"
-            >
-                <p class="text-gray-900 group-hover:text-indigo-600 transition">
-                    Group Hover: Text
-                </p>
-            </div>
-            <div class="group p-6 bg-white rounded shadow text-center">
-                <p
-                    class="group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
+        <!-- 1️⃣ 기본 애니메이션 예시 -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-black">
+                🎬 기본 애니메이션
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div
+                    class="p-6 bg-white rounded shadow text-center animate-bounce"
                 >
-                    Group Hover: Scale + Rotate
-                </p>
+                    Bounce
+                </div>
+                <div
+                    class="p-6 bg-white rounded shadow text-center animate-ping"
+                >
+                    Ping
+                </div>
+                <div
+                    class="p-6 bg-white rounded shadow text-center animate-pulse"
+                >
+                    Pulse
+                </div>
+                <div
+                    class="p-6 bg-white rounded shadow text-center animate-spin"
+                >
+                    Spin
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- 복합 애니메이션 효과 -->
-        <h2 class="text-2xl font-bold mb-6 text-black">
-            🎯 복합 애니메이션 조합
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-110 hover:rotate-3"
-            >
-                Hover: Scale + Rotate
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:-translate-y-2 hover:shadow-2xl"
-            >
-                Hover: Move + Shadow
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:blur-sm hover:brightness-125"
-            >
-                Hover: Blur + Brightness
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:invert hover:contrast-150"
-            >
-                Hover: Invert + Contrast
-            </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-110 active:bg-red-500 focus:ring-4 focus:ring-blue-400"
-            >
-                Hover + Active + Focus
-            </div>
-        </div>
+        <!-- 2️⃣ Hover / 상태 기반 애니메이션 -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-black">
+                🖱 상태 기반 애니메이션
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="text-center transition hover:scale-110">
+                    Hover: Scale
+                </div>
+                <div class="text-center transition hover:rotate-6">
+                    Hover: Rotate
+                </div>
+                <div class="text-center transition hover:opacity-50">
+                    Hover: Fade
+                </div>
 
-        <!-- Scroll 애니메이션 -->
-        <h2 class="text-2xl font-bold mb-6 text-black">
-            🖼 Scroll 진입 애니메이션 (새로고침하며 봐주세요 F5)
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12">
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 translate-y-8 opacity-0 scroll-fade"
-            >
-                Fade Up
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:bg-blue-600 hover:text-white"
+                >
+                    Hover: BG + Text
+                </div>
+
+                <div
+                    class="p-6 bg-neutral-800 border border-gray-400 text-white rounded transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                >
+                    <span class="block font-semibold text-lg"
+                        >Hover: Shadow</span
+                    >
+                </div>
+
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:skew-x-6"
+                >
+                    Hover: Skew X
+                </div>
+
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-125 focus:scale-90"
+                >
+                    Hover + Focus
+                </div>
+
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:-translate-y-2 active:opacity-70"
+                >
+                    Hover + Active
+                </div>
+
+                <div
+                    class="group p-6 bg-white rounded border border-gray-400 shadow text-center"
+                >
+                    <p
+                        class="text-gray-900 group-hover:text-indigo-600 transition"
+                    >
+                        Group Hover: Text
+                    </p>
+                </div>
+
+                <div class="group p-6 bg-white rounded shadow text-center">
+                    <p
+                        class="group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
+                    >
+                        Group Hover: Scale + Rotate
+                    </p>
+                </div>
+
+                <!-- ✅ 추가 애니메이션 -->
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:translate-x-2"
+                >
+                    Hover: Move Right
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:-translate-x-2"
+                >
+                    Hover: Move Left
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-125 hover:rotate-6 hover:text-red-500"
+                >
+                    Hover: Zoom + Rotate + Color
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-90 hover:grayscale"
+                >
+                    Hover: Shrink + Grayscale
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:rotate-12 hover:blur-sm"
+                >
+                    Hover: Rotate + Blur
+                </div>
             </div>
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 scale-50 opacity-0 scroll-zoom"
-            >
-                Zoom In
+        </section>
+
+        <!-- 3️⃣ 복합 애니메이션 조합 -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-black">
+                🎯 복합 애니메이션
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-110 hover:rotate-3"
+                >
+                    Hover: Scale + Rotate
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:-translate-y-2 hover:shadow-2xl"
+                >
+                    Hover: Move + Shadow
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:blur-sm hover:brightness-125"
+                >
+                    Hover: Blur + Brightness
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:invert hover:contrast-150"
+                >
+                    Hover: Invert + Contrast
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition hover:scale-110 active:bg-red-500 focus:ring-4 focus:ring-blue-400"
+                >
+                    Hover + Active + Focus
+                </div>
             </div>
-            <!-- 기존: Slide In -->
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 translate-x-8 opacity-0 scroll-slide"
-            >
-                Slide In
+        </section>
+
+        <!-- 4️⃣ Scroll 애니메이션 (IntersectionObserver) -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-black">
+                🖼 Scroll 진입 애니메이션 F5로 누르며 시각적으로 체크 요망
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 translate-y-8 opacity-0 scroll-fade"
+                >
+                    Fade Up
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 scale-50 opacity-0 scroll-zoom"
+                >
+                    Zoom In
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 translate-x-8 opacity-0 scroll-slide"
+                >
+                    Slide In Right
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 -translate-x-8 opacity-0 scroll-slide-left"
+                >
+                    Slide In Left
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 -translate-y-8 opacity-0 scroll-slide-up"
+                >
+                    Slide In Up
+                </div>
+                <div
+                    class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 rotate-6 opacity-0 scroll-rotate"
+                >
+                    Rotate In
+                </div>
             </div>
-            <!-- 추가됨: Slide In Left -->
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 -translate-x-8 opacity-0 scroll-slide-left"
-            >
-                Slide In Left
-            </div>
-            <!-- 추가됨: Slide In Up -->
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 -translate-y-8 opacity-0 scroll-slide-up"
-            >
-                Slide In Up
-            </div>
-            <!-- 추가됨: Rotate In -->
-            <div
-                class="p-6 bg-white rounded border border-gray-400 shadow text-center transition-all duration-700 rotate-6 opacity-0 scroll-rotate"
-            >
-                Rotate In
-            </div>
-        </div>
+        </section>
 
         <script>
             const observer = new IntersectionObserver(

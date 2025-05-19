@@ -1,0 +1,77 @@
+<!-- ✅ 카운터 영역 -->
+<div class="counter-section">
+    <div class="counter-box">
+        <div class="counter" data-target="10">0</div>
+        <p>년 경력</p>
+    </div>
+    <div class="counter-box">
+        <div class="counter" data-target="123">0</div>
+        <p>고객사 수</p>
+    </div>
+    <div class="counter-box">
+        <div class="counter" data-target="57">0</div>
+        <p>납품 완료</p>
+    </div>
+</div>
+
+<!-- ✅ 스타일 -->
+<style>
+    .counter-section {
+        display: flex;
+        justify-content: center;
+        gap: 60px;
+        padding: 80px 20px;
+        background-color: #f9f9f9;
+    }
+    .counter-box {
+        text-align: center;
+    }
+    .counter {
+        font-size: 48px;
+        font-weight: 700;
+        color: #007aff;
+    }
+    .counter + p {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    @media (max-width: 768px) {
+        .counter-section {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<!-- ✅ 스크립트 -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll(".counter");
+        const options = { threshold: 0.7 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute("data-target");
+                    let current = 0;
+                    const speed = target / 100;
+
+                    const updateCount = () => {
+                        if (current < target) {
+                            current += speed;
+                            counter.textContent = Math.ceil(current);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+
+                    updateCount();
+                    observer.unobserve(counter); // 한 번만 실행되게
+                }
+            });
+        }, options);
+
+        counters.forEach((counter) => observer.observe(counter));
+    });
+</script>

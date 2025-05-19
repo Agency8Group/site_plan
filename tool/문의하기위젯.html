@@ -1,0 +1,199 @@
+<!-- 문의 위젯 -->
+<div id="contact-widget">
+    <div
+        class="chat-icon"
+        style="--offset-x: 80px"
+        onclick="toggleContactForm()"
+    >
+        💬
+    </div>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            자주 묻는 질문
+            <span class="close-btn" onclick="toggleContactForm()">×</span>
+        </div>
+        <div class="chat-body">
+            <div class="faq-item">
+                <div class="faq-button" onclick="toggleAnswer(this)">
+                    운영시간이 어떻게 되나요?
+                </div>
+                <div class="faq-answer">
+                    운영시간은 평일 오전 9시부터 오후 6시까지입니다.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-button" onclick="toggleAnswer(this)">
+                    위치는 어디인가요?
+                </div>
+                <div class="faq-answer">
+                    서울시 강남구 테헤란로 123에 위치해 있습니다.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-button" onclick="toggleAnswer(this)">
+                    서비스 비용은 어떻게 되나요?
+                </div>
+                <div class="faq-answer">
+                    서비스 비용은 프로젝트 범위에 따라 달라지며 상담 후
+                    안내해드립니다.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-button" onclick="toggleAnswer(this)">
+                    상담은 어떻게 받을 수 있나요?
+                </div>
+                <div class="faq-answer">
+                    홈페이지 하단 문의폼 또는 전화로 상담 요청이 가능합니다.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #contact-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        font-family: "Segoe UI", sans-serif;
+        z-index: 9999;
+    }
+
+    .chat-icon {
+        background-color: #007aff;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        transform: translateX(var(--offset-x));
+    }
+
+    .chat-icon:hover {
+        background-color: #005ecb;
+        transform: translateX(var(--offset-x)) scale(1.1);
+    }
+
+    .chat-box {
+        width: 320px;
+        height: 0;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: height 0.4s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-box.open {
+        height: 480px;
+    }
+
+    .chat-header {
+        background-color: #007aff;
+        color: white;
+        padding: 14px 16px;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .chat-header .close-btn {
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .chat-body {
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background-color: #f9f9f9;
+    }
+
+    .faq-button {
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        text-align: left;
+        transition: background 0.2s;
+    }
+
+    .faq-button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .faq-answer {
+        background-color: #e0e0e0;
+        margin: 4px 0 12px 0;
+        padding: 10px 12px;
+        border-radius: 8px;
+        display: none;
+        animation: fadeIn 0.3s ease;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .faq-answer.open {
+        display: block;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-4px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ✅ 모바일 대응 */
+    @media (max-width: 480px) {
+        #contact-widget {
+            right: 10px;
+            bottom: 16px;
+        }
+
+        .chat-box {
+            width: 90vw;
+        }
+
+        .chat-icon {
+            width: 54px;
+            height: 54px;
+            font-size: 26px;
+        }
+    }
+</style>
+
+<script>
+    function toggleContactForm() {
+        const chatBox = document.getElementById("chatBox");
+        chatBox.classList.toggle("open");
+    }
+
+    function toggleAnswer(button) {
+        const allAnswers = document.querySelectorAll(".faq-answer");
+        allAnswers.forEach((a) => a.classList.remove("open"));
+
+        const answer = button.nextElementSibling;
+        if (!answer.classList.contains("open")) {
+            answer.classList.add("open");
+        }
+    }
+</script>

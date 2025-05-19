@@ -1,110 +1,314 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>EIBE Navigation Type Index</title>
+        <title>기능 개발 예정 페이지</title>
         <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 60px 20px;
-                background: #f0f0f0;
+            /* 아코디언 스타일 */
+            .accordion {
+                background-color: #f1f1f1;
+                color: #444;
+                cursor: pointer;
+                padding: 18px;
+                width: 100%;
+                border: none;
+                text-align: left;
+                outline: none;
+                font-size: 15px;
+                transition: 0.4s;
+                border-radius: 5px;
+                margin-bottom: 10px;
             }
 
-            h1 {
-                text-align: center;
-                margin-bottom: 40px;
+            .accordion.active,
+            .accordion:hover {
+                background-color: #007aff;
+                color: white;
             }
 
-            .container {
+            .panel {
+                padding: 0 18px;
+                display: none;
+                overflow: hidden;
+                background-color: #f9f9f9;
+                margin-bottom: 10px;
+            }
+
+            iframe {
+                width: 100%;
+                height: 600px;
+            }
+
+            /* 문의하기 위젯 스타일 */
+            #contact-widget {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                font-family: "Segoe UI", sans-serif;
+                z-index: 9999;
+            }
+
+            .chat-icon {
+                background-color: #007aff;
+                color: white;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                font-size: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+            }
+
+            .chat-icon:hover {
+                background-color: #005ecb;
+                transform: scale(1.1);
+            }
+
+            .chat-box {
+                width: 320px;
+                height: 0;
+                overflow: hidden;
+                background-color: white;
+                border-radius: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transition: height 0.4s ease;
                 display: flex;
                 flex-direction: column;
-                gap: 30px;
-                max-width: 600px;
-                margin: 0 auto;
             }
 
-            .nav-card {
-                background: #fff;
-                border-radius: 10px;
-                padding: 25px 20px;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-                transition: transform 0.2s ease;
+            .chat-box.open {
+                height: 480px;
             }
 
-            .nav-card:hover {
-                transform: translateY(-4px);
-            }
-
-            .nav-card h2 {
-                margin: 0 0 10px;
-            }
-
-            .nav-card p {
-                margin-bottom: 15px;
-                color: #555;
-            }
-
-            .nav-card a {
-                display: inline-block;
-                text-decoration: none;
+            .chat-header {
+                background-color: #007aff;
                 color: white;
-                background: #0073e6;
-                padding: 10px 18px;
-                border-radius: 6px;
-                transition: background-color 0.3s ease-in-out;
+                padding: 14px 16px;
+                font-weight: bold;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
             }
 
-            .nav-card a:hover {
-                background: #005bb5;
+            .chat-header .close-btn {
+                cursor: pointer;
+                font-size: 20px;
             }
 
-            /* ✅ SPA 카드 강조 스타일 */
-            .spa-card {
-                background: #ffe5e5;
-                border: 2px solid #ff4d4d;
+            .chat-body {
+                flex-grow: 1;
+                padding: 10px;
+                overflow-y: auto;
+                background-color: #f9f9f9;
             }
 
-            .spa-card h2 {
-                color: #cc0000;
+            .faq-button {
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+                padding: 12px;
+                margin-bottom: 8px;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 15px;
+                text-align: left;
+                transition: background 0.2s;
+            }
+
+            .faq-button:hover {
+                background-color: #f0f0f0;
+            }
+
+            .faq-answer {
+                background-color: #e0e0e0;
+                margin: 4px 0 12px 0;
+                padding: 10px 12px;
+                border-radius: 8px;
+                display: none;
+                animation: fadeIn 0.3s ease;
+                font-size: 14px;
+                color: #333;
+            }
+
+            .faq-answer.open {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-4px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         </style>
     </head>
     <body>
-        <h1>EIBE Navigation Demo Index</h1>
-        <div class="container">
-            <div class="nav-card">
-                <h2>1. 앵커 기반 (Anchor-based)</h2>
-                <p>
-                    전체 콘텐츠를 한 페이지에 나열하고, 각 섹션 ID로 스크롤
-                    이동합니다.
-                </p>
-                <a href="./sub/anchor.html">앵커 기반 페이지 보기</a>
-            </div>
-            <div class="nav-card">
-                <h2>2. 탭 기반 (Tab-based)</h2>
-                <p>
-                    페이지 내에서 탭을 클릭하면 해당 섹션만 표시되며 나머지는
-                    숨겨집니다.
-                </p>
-                <a href="./sub/tab.html">탭 기반 페이지 보기</a>
-            </div>
-            <div class="nav-card spa-card">
-                <h2>3. SPA 기반 (Single Page Application)</h2>
-                <p>
-                    필요한 콘텐츠만 JavaScript로 주입하며, 매우 유연하고
-                    가볍습니다.
-                </p>
-                <a href="./sub/spa.html">SPA 기반 페이지 보기</a>
-            </div>
-            <div class="nav-card">
-                <h2>action_sample</h2>
-                <p></p>
-                <a href="./action/action_sample.html"
-                    >action_sample 페이지 보기</a
+        <!-- 아코디언 시작 -->
+        <h2>기능 개발 예정 페이지</h2>
+
+        <button class="accordion">PDF 파일 보기</button>
+        <div class="panel">
+            <iframe
+                src="./tool/EIBE 공식 웹사이트 기능구상_ver.1.pdf"
+                frameborder="0"
+            ></iframe>
+        </div>
+
+        <button class="accordion">문의하기 위젯</button>
+        <div class="panel">
+            <!-- 문의하기 위젯 HTML -->
+            <div id="contact-widget">
+                <div
+                    class="chat-icon"
+                    style="--offset-x: 80px"
+                    onclick="toggleContactForm()"
                 >
+                    💬
+                </div>
+                <div class="chat-box" id="chatBox">
+                    <div class="chat-header">
+                        자주 묻는 질문
+                        <span class="close-btn" onclick="toggleContactForm()"
+                            >×</span
+                        >
+                    </div>
+                    <div class="chat-body">
+                        <div class="faq-item">
+                            <div
+                                class="faq-button"
+                                onclick="toggleAnswer(this)"
+                            >
+                                운영시간이 어떻게 되나요?
+                            </div>
+                            <div class="faq-answer">
+                                운영시간은 평일 오전 9시부터 오후 6시까지입니다.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div
+                                class="faq-button"
+                                onclick="toggleAnswer(this)"
+                            >
+                                위치는 어디인가요?
+                            </div>
+                            <div class="faq-answer">
+                                서울시 강남구 테헤란로 123에 위치해 있습니다.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div
+                                class="faq-button"
+                                onclick="toggleAnswer(this)"
+                            >
+                                서비스 비용은 어떻게 되나요?
+                            </div>
+                            <div class="faq-answer">
+                                서비스 비용은 프로젝트 범위에 따라 달라지며 상담
+                                후 안내해드립니다.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div
+                                class="faq-button"
+                                onclick="toggleAnswer(this)"
+                            >
+                                상담은 어떻게 받을 수 있나요?
+                            </div>
+                            <div class="faq-answer">
+                                홈페이지 하단 문의폼 또는 전화로 상담 요청이
+                                가능합니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <button class="accordion">기타 기능 (개발 예정)</button>
+        <div class="panel">
+            <p>이 섹션은 향후 개발될 기능들입니다. 현재는 개발 중입니다.</p>
+            <ul>
+                <li>추가기능 고안 필요</li>
+            </ul>
+        </div>
+
+        <button class="accordion">삭제된 프로젝트</button>
+        <div class="panel">
+            <p>
+                이 프로젝트는 현재 삭제되었습니다. 삭제된 프로젝트에 대한 정보는
+                아래에서 확인할 수 있습니다.
+            </p>
+
+            <!-- 이동 가능한 버튼들 -->
+            <button onclick="navigateToDeleteProject()">프로젝트 1 보기</button>
+
+            <!-- 삭제된 프로젝트 내용 예시 -->
+            <div id="project1">
+                <h3>프로젝트 1</h3>
+                <p>
+                    삭제된 이유: 프로젝트 진행 도중 문제가 발생하여
+                    종료되었습니다.
+                </p>
+            </div>
+
+            <!-- iframe을 사용하여 다른 HTML 페이지 표시 -->
+            <div id="projectIframe" style="display: none">
+                <iframe
+                    src="./sub/delete.html"
+                    frameborder="0"
+                    width="100%"
+                    height="600px"
+                ></iframe>
+            </div>
+        </div>
+        <!-- 아코디언 끝 -->
+
+        <script>
+            // 아코디언 기능
+            var acc = document.getElementsByClassName("accordion");
+            for (var i = 0; i < acc.length; i++) {
+                acc[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display === "block") {
+                        panel.style.display = "none";
+                    } else {
+                        panel.style.display = "block";
+                    }
+                });
+            }
+
+            // 문의하기 위젯 기능
+            function toggleContactForm() {
+                const chatBox = document.getElementById("chatBox");
+                chatBox.classList.toggle("open");
+            }
+
+            function toggleAnswer(button) {
+                const allAnswers = document.querySelectorAll(".faq-answer");
+                allAnswers.forEach((a) => a.classList.remove("open"));
+
+                const answer = button.nextElementSibling;
+                if (!answer.classList.contains("open")) {
+                    answer.classList.add("open");
+                }
+            }
+
+            // 프로젝트로 이동하는 함수
+            function navigateToDeleteProject() {
+                var iframeContainer = document.getElementById("projectIframe");
+                iframeContainer.style.display = "block"; // iframe 표시
+            }
+        </script>
     </body>
 </html>

@@ -593,6 +593,100 @@
             </script>
         </div>
 
+        <button class="accordion">5. 슬로건 전환</button>
+        <div class="panel">
+            <!-- ✅ 7. 슬로건 키워드 교체 애니메이션 -->
+            <section class="slogan-wrapper">
+                <div class="rotating-slogan">
+                    <span class="prefix">우리는</span>
+                    <span class="changing-text" id="changingText"
+                        >전문가가 선택한 브랜드</span
+                    >
+                </div>
+            </section>
+
+            <style>
+                .floating-cta {
+                    position: fixed;
+                    bottom: 16px;
+                    right: 16px;
+                    background: linear-gradient(45deg, #ffc107, #ff9800);
+                    padding: 12px 20px;
+                    border-radius: 40px;
+                    font-weight: bold;
+                    color: white;
+                    font-size: 15px;
+                    cursor: pointer;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                    z-index: 9999;
+                    transition: transform 0.3s ease;
+                }
+                .floating-cta:hover {
+                    transform: translateY(-3px);
+                }
+
+                .slogan-wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 40px 20px;
+                    background: linear-gradient(to right, #f7f7f7, #ffffff);
+                    text-align: center;
+                }
+
+                .rotating-slogan {
+                    font-size: 22px;
+                    font-weight: 600;
+                    color: #222;
+                    line-height: 1.6;
+                    background: white;
+                    padding: 12px 20px;
+                    border-radius: 12px;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+                    max-width: 90vw;
+                }
+
+                .rotating-slogan .changing-text {
+                    color: #007aff;
+                    display: inline-block;
+                    transition: opacity 0.3s ease-in-out;
+                }
+
+                @media (max-width: 768px) {
+                    .rotating-slogan {
+                        font-size: 18px;
+                        padding: 10px 14px;
+                    }
+                    .floating-cta {
+                        font-size: 14px;
+                        padding: 10px 16px;
+                        bottom: 12px;
+                        right: 12px;
+                    }
+                }
+            </style>
+
+            <script>
+                const slogans = [
+                    "전문가가 선택한 브랜드",
+                    "소비자가 선택한 브랜드",
+                    "1위 성장률",
+                    "누적 100만 소비자 신뢰",
+                ];
+                let sloganIndex = 0;
+                const changingText = document.getElementById("changingText");
+
+                setInterval(() => {
+                    sloganIndex = (sloganIndex + 1) % slogans.length;
+                    changingText.style.opacity = 0;
+                    setTimeout(() => {
+                        changingText.textContent = slogans[sloganIndex];
+                        changingText.style.opacity = 1;
+                    }, 300);
+                }, 4000);
+            </script>
+        </div>
+
         <button class="accordion">기타 기능 (개발 예정)</button>
         <div class="panel">
             <p>이 섹션은 향후 개발될 기능들입니다. 현재는 개발 중입니다.</p>

@@ -687,6 +687,69 @@
             </script>
         </div>
 
+        <button class="accordion">6. 고성능js_GSAP + SplitType.js</button>
+        <div class="panel">
+            실험용 카페 24 나 아임웹등에서 해당 고성능 기능 사용시 전체구조 충돌
+            일어날수있지만 섹션나눠 강조할 페이지가 있다면 시도해 볼만함
+            <!-- HTML -->
+            <div id="text1">Dynamic Text</div>
+
+            <!-- CDN -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+            <script src="https://unpkg.com/split-type"></script>
+
+            <!-- Script -->
+            <script>
+                const text1 = new SplitType("#text1", { types: "chars" });
+
+                gsap.from(text1.chars, {
+                    opacity: 0,
+                    y: 40,
+                    stagger: 0.05,
+                    duration: 0.7,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        gsap.to(text1.chars, {
+                            x: (i) => (i - text1.chars.length / 2) * 4,
+                            color: "#ff5c5c",
+                            scale: 1.2,
+                            yoyo: true,
+                            repeat: -1,
+                            stagger: 0.03,
+                            ease: "sine.inOut",
+                        });
+                    },
+                });
+            </script>
+
+            <style>
+                #text1 {
+                    font-size: 2.5rem;
+                    font-weight: bold;
+                    text-align: center;
+                    margin-top: 100px;
+                }
+            </style>
+        </div>
+
+        <button class="accordion">[Lottie] 일러스트 모션 적용</button>
+        <div class="panel">
+            <!-- Lottie -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+            <div id="lottie-box" style="width: 200px; height: 200px"></div>
+
+            <script>
+                lottie.loadAnimation({
+                    container: document.getElementById("lottie-box"),
+                    renderer: "svg",
+                    loop: true,
+                    autoplay: true,
+                    path: "https://assets6.lottiefiles.com/packages/lf20_0yfsb3a1.json", // Lottie JSON URL
+                });
+            </script>
+        </div>
+
         <button class="accordion">기타 기능 (개발 예정)</button>
         <div class="panel">
             <p>이 섹션은 향후 개발될 기능들입니다. 현재는 개발 중입니다.</p>
@@ -694,7 +757,7 @@
                 <li>추가기능 고안 필요</li>
             </ul>
         </div>
-
+        <!-- 삭제된 프로젝트 내용 예시 ************************************************************-->
         <button class="accordion">삭제된 프로젝트</button>
         <div class="panel">
             <p>
@@ -705,7 +768,6 @@
             <!-- 이동 가능한 버튼들 -->
             <button onclick="navigateToDeleteProject()">프로젝트 1 보기</button>
 
-            <!-- 삭제된 프로젝트 내용 예시 -->
             <div id="project1">
                 <h3>프로젝트 1</h3>
                 <p>

@@ -690,7 +690,7 @@
         <button class="accordion">6. 고성능js_GSAP + SplitType.js</button>
         <div class="panel">
             실험용 카페 24 나 아임웹등에서 해당 고성능 기능 사용시 전체구조 충돌
-            일어날수있지만 섹션나눠 강조할 페이지가 있다면 시도해 볼만함
+            일어날수있지만 섹션나눠 강조할 페이지가 있다면 시도 체크만 할 예정
             <!-- HTML -->
             <div id="text1">Dynamic Text</div>
 
@@ -733,8 +733,15 @@
         </div>
 
         <button class="accordion">[Lottie] 일러스트 모션 적용</button>
+
         <div class="panel">
             <!-- Lottie -->
+            https://lottiefiles.com/
+            <br />
+            애니메이터 들이 공유,하고있는 가젯들을 구매 혹은 무료버전의 액션
+            아이콘을 넣어 사이트를 컨텐츠 섹션별을 좀더 역동적으로 수정 가능
+            사이트 적용가능여부 및 위치조절 등은 직접 코딩 하여, 수정 ,
+            테스트하는 방향으로 예상할수있음
             <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
             <div id="lottie-box" style="width: 200px; height: 200px"></div>
@@ -748,6 +755,20 @@
                     path: "https://assets6.lottiefiles.com/packages/lf20_0yfsb3a1.json", // Lottie JSON URL
                 });
             </script>
+
+            <script
+                src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+                type="module"
+            ></script>
+
+            <dotlottie-player
+                src="https://lottie.host/dd380744-d042-4fe5-94e2-8f9941c078fb/Lfw92J9zSB.lottie"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px"
+                loop
+                autoplay
+            ></dotlottie-player>
         </div>
 
         <button class="accordion">기타 기능 (개발 예정)</button>
